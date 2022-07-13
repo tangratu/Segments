@@ -1,6 +1,7 @@
 
 
 #include <iostream>
+#include <vector>
 class Segment {
 	int start;
 	int end;
@@ -33,10 +34,10 @@ public:
 int main()
 {
     int n, a, b, c;
-	Segment* allpairs = nullptr;
+	
     std::cin >> n >> a >> b >> c;
 	int unp = n;	
-	allpairs = new Segment[(n/a)*(n/b)];
+	std::vector<Segment> pairs;
 	int count = 0;
 	for (int i = 0; i < n; i+=a)
 	{
@@ -47,14 +48,14 @@ int main()
 				unp  -= c;
 				for (size_t y = 0; y < count; y++)
 				{
-					unp += allpairs[y].getoverlap(i, z);
+					unp += pairs[y].getoverlap(i, z);
 				}
-				allpairs[count] = Segment(i, z);
+				pairs.push_back(Segment(i, z));
 				count++;
 			}
 		}
 	}
-	delete[] allpairs;
+	
 	std::cout << unp;
 }
 
